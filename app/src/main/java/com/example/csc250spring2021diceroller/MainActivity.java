@@ -3,173 +3,91 @@ package com.example.csc250spring2021diceroller;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Random;
 
-
-    private Button zeroButton;
-    private Button oneButton;
-    private Button twoButton;
-    private Button threeButton;
-    private Button fourButton;
-    private Button fiveButton;
-    private Button sixButton;
-    private Button sevenButton;
-    private Button eightButton;
-    private Button nineButton;
+public class MainActivity extends AppCompatActivity
+{
     private TextView qtyTV;
+    private TextView selectedDieTV;
+    private String currentQtyText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        this.zeroButton = this.findViewById(R.id.ZeroB);
         this.qtyTV = this.findViewById(R.id.qtyTV);
+        this.selectedDieTV = this.findViewById(R.id.selectedDieTV);
+        this.qtyTV.setText("");
+        this.currentQtyText = "";
     }
 
+    private String extractNumberOfSides(String diceType)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        this.oneButton = this.findViewById(R.id.OneB);
-        this.qtyTV = this.findViewById(R.id.qtyTV);
+        //take something that looks like "D20" and returns "4"
+        String answer = "";
+        for(int i = 1; i < diceType.length(); i++)
+        {
+            answer += diceType.charAt(i);
+        }
+        return answer;
     }
 
+    public void onRollButtonPressed(View v)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //get the qty as an int
+        String qtyString = this.qtyTV.getText().toString();
+        int qtyInt = Integer.parseInt(qtyString);
+        int[] theRolls = new int[qtyInt];
 
-        this.twoButton = this.findViewById(R.id.TwoB);
-        this.qtyTV = this.findViewById(R.id.qtyTV);
+        //get the number of sides as an int
+        String fullDiceString = this.selectedDieTV.getText().toString(); //like "D4" or "D6"
+        String trimmedDiceString = this.extractNumberOfSides(fullDiceString);
+        //String trimmerDiceString = fullDiceString.substring(1);
+        int numberOfSidesInt = Integer.parseInt(trimmedDiceString);
+        Random r = new Random();
+
+        private rollDice()
+    {
+        val dice = Dice(20)
+        val diceRoll = dice.roll()
+        val resultTextView: TextView = findViewById(R.id.textView)
+        resultTextView.text = diceRoll.toString()
+    }
+        //I want to roll the dice qtyInt number of times and store
+        //each roll in a different bucket of theRolls and set our
+        //textView on the interface for the individual rolls approprately
+        //as well as keep a running total and set that textView appropriately
+        //as well.
+        //FINISH HW HERE!
+
     }
 
+    public void diceButtonPressed(View v)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        this.threeButton = this.findViewById(R.id.ThreeB);
-        this.qtyTV = this.findViewById(R.id.qtyTV);
+        this.selectedDieTV.setText(v.getTag().toString());
     }
 
+    public void clearButtonPressed(View v)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        this.fourButton = this.findViewById(R.id.FourB);
-        this.qtyTV = this.findViewById(R.id.qtyTV);
-    }
-
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        this.fiveButton = this.findViewById(R.id.FiveB);
-        this.qtyTV = this.findViewById(R.id.qtyTV);
-    }
-
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        this.sixButton = this.findViewById(R.id.SixB);
-        this.qtyTV = this.findViewById(R.id.qtyTV);
-    }
-
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        this.sevenButton = this.findViewById(R.id.SevenB);
-        this.qtyTV = this.findViewById(R.id.qtyTV);
-    }
-
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        this.eightButton = this.findViewById(R.id.EightB);
-        this.qtyTV = this.findViewById(R.id.qtyTV);
-    }
-
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        this.nineButton = this.findViewById(R.id.NineB);
-        this.qtyTV = this.findViewById(R.id.qtyTV);
+        this.currentQtyText = "";
+        this.qtyTV.setText(this.currentQtyText);
     }
 
     public void qtyButtonPressed(View v)
     {
-        if(v == this.zeroButton)
-        {
-            this.qtyTV.setText("0");
-        }
-    }
+        Button b = (Button)v;
 
-    {
-        if(v == this.oneButton)
+        if(this.currentQtyText.length() == 0 && b.getText().equals("0"))
         {
-            this.qtyTV.setText("1");
+            return;
         }
-    }
-
-    {
-        if(v == this.twoButton)
-        {
-            this.qtyTV.setText("2");
-        }
-    }
-
-    {
-        if(v == this.threeButton)
-        {
-            this.qtyTV.setText("3");
-        }
-    }
-
-    {
-        if(v == this.fourButton)
-        {
-            this.qtyTV.setText("4");
-        }
-    }
-
-    {
-        if(v == this.fiveButton)
-        {
-            this.qtyTV.setText("5");
-        }
-    }
-
-    {
-        if(v == this.sixButton)
-        {
-            this.qtyTV.setText("6");
-        }
-    }
-
-    {
-        if(v == this.sevenButton)
-        {
-            this.qtyTV.setText("7");
-        }
-    }
-
-    {
-        if(v == this.eightButton)
-        {
-            this.qtyTV.setText("8");
-        }
-    }
-
-    {
-        if(v == this.nineButton)
-        {
-            this.qtyTV.setText("9");
-        }
+        this.currentQtyText += b.getText();
+        this.qtyTV.setText(this.currentQtyText);
     }
 
 }
